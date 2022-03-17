@@ -45,7 +45,7 @@ func Example_populateTrie() {
 	var node Node = trie
 	var res []string
 	for {
-		runes := node.NextRunes()
+		runes := node.Runes()
 		str := strconv.QuoteRune(runes[0])
 		res = append(res, str)
 		node = node.NextNode(runes[0])
@@ -66,17 +66,17 @@ func Example_searchTrie() {
 	Populate(trie, "ant")
 	Populate(trie, "another")
 
-	result := Search(trie, "ant")
-	fmt.Println(result)
+	result := VerifyWord(trie, "ant")
+	fmt.Printf("Verify that 'ant' is found in this trie and returns error. %v\n", result)
 
-	result = Search(trie, "another")
-	fmt.Println(result)
+	result = VerifyWord(trie, "another")
+	fmt.Printf("Verify that 'another' is found in this trie and returns error. %v\n", result)
 
-	result = Search(trie, "an")
+	result = VerifyWord(trie, "an")
 	fmt.Println(result)
 
 	// Output:
-	// <nil>
-	// <nil>
+	// Verify that 'ant' is found in this trie and returns error. <nil>
+	// Verify that 'another' is found in this trie and returns error. <nil>
 	// Trie search error. Unable to match criteria: an
 }

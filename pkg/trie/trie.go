@@ -28,12 +28,22 @@ func newError(message string) *Error {
 	}
 }
 
+// Node of a trie
 type Node interface {
+	// InsertRune value of edge from this node
 	InsertRune(data rune) Node
+
+	// IsLeaf determines if this node
 	IsLeaf() bool
+
+	// MatchRune determines if a rune matches one of the edge.
 	MatchedRune(data rune) (isEnd bool, isMatched bool)
+
+	// NextNode return the nodes that is reference by the edge named 'ch'
 	NextNode(ch rune) Node
-	NextRunes() []rune
+
+	// Runes returns the edges connected to this node
+	Runes() []rune
 }
 
 // This is not serializable
@@ -73,7 +83,7 @@ func (d *defaultNode) NextNode(ch rune) (node Node) {
 	return node
 }
 
-func (d *defaultNode) NextRunes() []rune {
+func (d *defaultNode) Runes() []rune {
 	var runes []rune
 
 	for r, _ := range d.edges {
@@ -102,20 +112,20 @@ func Populate(trie Node, str string) {
 	}
 }
 
-// Search a Trie
-func Search(trie Node, criteria string) error {
+// VerifyWord against a pre-populated trie
+func VerifyWord(trie Node, word string) error {
 	var isEnd, isMatched bool
 	var err error
 	var node Node = trie
-	for _, ch := range criteria {
+	for _, ch := range word {
 		isEnd, isMatched = node.MatchedRune(ch)
 		if !isMatched {
-			return newError(fmt.Sprintf("Trie search error. Unable to match criteria: %v", criteria))
+			return newError(fmt.Sprintf("Trie search error. Unable to match criteria: %v", word))
 		}
 		node = node.NextNode(ch)
 	}
 	if !isEnd {
-		err = newError(fmt.Sprintf("Trie search error. Unable to match criteria: %v", criteria))
+		err = newError(fmt.Sprintf("Trie search error. Unable to match criteria: %v", word))
 	} else {
 		err = nil
 	}
