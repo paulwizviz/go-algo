@@ -131,3 +131,29 @@ func VerifyWord(trie Node, word string) error {
 	}
 	return err
 }
+
+// DeleteWord from a trie
+func DeleteWord(trie Node, word string) error {
+	var todelete map[rune]Node = make(map[rune]Node)
+	var err error
+	var isEnd, isMatched bool
+
+	var node Node = trie
+	for _, ch := range word {
+		todelete[ch] = node
+		isEnd, isMatched = node.MatchedRune(ch)
+		if !isMatched {
+			return newError(fmt.Sprintf("Trie search error. Unable to delete word: %v", word))
+		}
+		node = node.NextNode(ch)
+	}
+	if !isEnd {
+		err = newError(fmt.Sprintf("Trie search error. Unable to delete word: %v", word))
+	} else {
+		for k, _ := range todelete {
+			delete(todelete, k)
+		}
+		err = nil
+	}
+	return err
+}

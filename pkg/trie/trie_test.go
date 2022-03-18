@@ -80,3 +80,24 @@ func Example_searchTrie() {
 	// Verify that 'another' is found in this trie and returns error. <nil>
 	// Trie search error. Unable to match criteria: an
 }
+
+func Example_deleteTrie() {
+	trie := NewDefaultNode()
+	Populate(trie, "ant")
+	Populate(trie, "another")
+
+	result := DeleteWord(trie, "an")
+	fmt.Println(result)
+
+	result = DeleteWord(trie, "another")
+	fmt.Printf("Word 'another' is deleted from trie. Error: %v\n", result)
+
+	result = VerifyWord(trie, "another")
+	fmt.Printf("Veification of word 'another' yield no Error. %v", result)
+
+	// Output:
+	// Trie search error. Unable to delete word: an
+	// Word 'another' is deleted from trie. Error: <nil>
+	// Veification of word 'another' yield no Error. <nil>
+
+}
