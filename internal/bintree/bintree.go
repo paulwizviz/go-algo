@@ -21,7 +21,7 @@ func newError(message string) error {
 	}
 }
 
-// Node of a binary tree
+// Node[N model.NumericType] of a binary tree
 type Node[N model.NumericType] interface {
 
 	// Key returns the node's key
@@ -46,35 +46,27 @@ type Node[N model.NumericType] interface {
 	SetRight(left Node[N])
 }
 
+// NewNode[N model.NumericType] is a callback to an implementation to instantiate a node
 type NewNode[N model.NumericType] func(key N) Node[N]
 
-func InsertNode[N model.NumericType](newNode NewNode[N], root Node[N], key N) {
+// InsertNode[N model.NumericType] an operation to create a binary tree
+func InsertNode[N model.NumericType](newNode NewNode[N], root Node[N], key N) Node[N] {
+
+	if root == nil {
+		root = newNode(key)
+	}
 
 	if root.Key() == key {
 		root.AddCount(root.Count() + 1)
-		return
 	}
 
 	if root.Key() < key {
-		child := root.Right()
-		if child == nil {
-			child = newNode(key)
-			child.AddCount(1)
-			root.SetRight(child)
-			return
-		}
-		InsertNode(newNode, root.Right(), key)
-		return
+		root.SetRight(InsertNode(newNode, root.Right(), key))
 	}
 
-	child := root.Left()
-	if child == nil {
-		child = NewDefaultNode(key)
-		child.AddCount(1)
-		root.SetLeft(child)
-		return
+	if root.Key() > key {
+		root.SetLeft(InsertNode(newNode, root.Left(), key))
 	}
-	InsertNode(newNode, child, key)
-	return
 
+	return root
 }
