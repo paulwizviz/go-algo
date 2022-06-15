@@ -1,25 +1,8 @@
 package bintree
 
 import (
-	"fmt"
-
 	"github.com/paulwizviz/go-algo/internal/basemdl"
 )
-
-// Error represents a error related to the operations of cache
-type Error struct {
-	message string
-}
-
-func (e *Error) Error() string {
-	return fmt.Sprintf("Binary tree. Error: %v", e.message)
-}
-
-func newError(message string) error {
-	return &Error{
-		message: message,
-	}
-}
 
 // Node[N model.NumericType] of a binary tree
 type Node[N basemdl.NumericType] interface {

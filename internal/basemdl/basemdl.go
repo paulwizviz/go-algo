@@ -5,21 +5,6 @@ import (
 	"time"
 )
 
-// Error represents related to model operations
-type Error struct {
-	message string
-}
-
-func (e *Error) Error() string {
-	return e.message
-}
-
-func newError(message string) error {
-	return &Error{
-		message: message,
-	}
-}
-
 // Identifier a unique time based value
 type Identifier int64
 
