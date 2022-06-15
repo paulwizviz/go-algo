@@ -6,9 +6,9 @@ NOTE: The implementation in this module are mostly based on Go 1.18
 
 ## Generics and constraints
 
-In the package `model` you will find an example, demonstrating the use of Go generics.
+In the package `sharedmdl` you will find an example, demonstrating the use of Go generics.
 
-The interface named [NumericType](./internal/model/model.go) is an example of a constraints.
+The interface named [NumericType](./internal/model/sharedmdl.go) is an example of a constraints.
 
 ## Binary tree structure
 

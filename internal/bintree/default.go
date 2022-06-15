@@ -1,10 +1,12 @@
 package bintree
 
-import "github.com/paulwizviz/go-data/internal/model"
+import (
+	"github.com/paulwizviz/go-data/internal/sharedmdl"
+)
 
 // default implementation of a binary node using pointers.
 // NOTE: This is not serializable.
-type defaultNode[N model.NumericType] struct {
+type defaultNode[N sharedmdl.NumericType] struct {
 	key   N
 	count uint32
 	left  Node[N]
@@ -41,7 +43,7 @@ func (p *defaultNode[N]) SetRight(right Node[N]) {
 
 // NewDefaultNode instantiate a reference to adefault implementation
 // of a Node
-func NewDefaultNode[N model.NumericType](key N) Node[N] {
+func NewDefaultNode[N sharedmdl.NumericType](key N) Node[N] {
 	return &defaultNode[N]{
 		key: key,
 	}
