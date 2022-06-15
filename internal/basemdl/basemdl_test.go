@@ -1,4 +1,4 @@
-package sharedmdl
+package basemdl
 
 import (
 	"fmt"

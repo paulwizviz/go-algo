@@ -3,7 +3,7 @@ package bintree
 import (
 	"fmt"
 
-	"github.com/paulwizviz/go-data/internal/sharedmdl"
+	"github.com/paulwizviz/go-algo/internal/basemdl"
 )
 
 // Error represents a error related to the operations of cache
@@ -22,7 +22,7 @@ func newError(message string) error {
 }
 
 // Node[N model.NumericType] of a binary tree
-type Node[N sharedmdl.NumericType] interface {
+type Node[N basemdl.NumericType] interface {
 
 	// Key returns the node's key
 	Key() N
@@ -47,10 +47,10 @@ type Node[N sharedmdl.NumericType] interface {
 }
 
 // NewNode[N model.NumericType] is a callback to an implementation to instantiate a node
-type NewNode[N sharedmdl.NumericType] func(key N) Node[N]
+type NewNode[N basemdl.NumericType] func(key N) Node[N]
 
 // InsertNode[N model.NumericType] an operation to create a binary tree
-func InsertNode[N sharedmdl.NumericType](newNode NewNode[N], root Node[N], key N) Node[N] {
+func InsertNode[N basemdl.NumericType](newNode NewNode[N], root Node[N], key N) Node[N] {
 
 	if root == nil {
 		root = newNode(key)

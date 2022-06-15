@@ -1,26 +1,29 @@
 # Overview
 
-The purpose of this module is to demonstrate implementation of data structure using Go.
+A project demonstrating implementation of data structure and algorithm.
 
 NOTE: The implementation in this module are mostly based on Go 1.18
 
-## Generics and constraints
+## cmd
 
-In the package `sharedmdl` you will find an example, demonstrating the use of Go generics.
+This folder contains a collection of main packages used to create executable apps.
 
-The interface named [NumericType](./internal/model/sharedmdl.go) is an example of a constraints.
+## internal
 
-## Binary tree structure
+This folder containers library packages to support development under `cmd` folder.
 
-A binary tree is a tree data structure in which each node has at most two children. Please refer to [wikipedia](https://en.wikipedia.org/wiki/Binary_tree) for more information.
+## Docs
 
-An implementation of a binary is in this package [bintree](./internal/bintree).
+You will find detail descriptions of applications and data models in this project.
 
-## Trie data structure
+### Applications
 
-A Trie is a data structure for storing strings. To learn more about the inner workings of this data structure, I recommend this video titled [Trie Data Structure](https://www.youtube.com/watch?v=-urNrIAQnNo).
+* [BIFID cipher](./docs/bifid.md)
 
-You will find a Go implementation in this package [trie](./internal/trie).
+### Data models
+
+* [Base model](./docs/basemodel.md)
+* [Tree structures](./docs/treemdl.md)
 
 ## Disclaimers
 
