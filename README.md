@@ -10,7 +10,7 @@ This folder contains a collection of main packages used to create executable app
 
 ## internal
 
-This folder containers library packages to support development under `cmd` folder.
+This folder contains shared dependency packages to support development work under `cmd` folder.
 
 ## Docs
 
