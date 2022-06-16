@@ -1,6 +1,8 @@
 package bintree
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func Example_insertNode1() {
 	root := InsertNode(NewDefaultNode[uint8], nil, 6)

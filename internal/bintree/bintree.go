@@ -1,11 +1,16 @@
 package bintree
 
-import (
-	"github.com/paulwizviz/go-algo/internal/basemdl"
-)
+// numericType is a generic type constrains consisting of Go numerics.
+// NOTE: This is only for demonstration purpose only. There are a number
+// of equivalent constraints in standard packages. One example is the
+// `constraints` package. You can also use an alias to numeric constraints
+// call `comparable`.
+type numericType interface {
+	uint8 | uint16 | uint32 | uint64 | int8 | int16 | int32 | int64 | float32 | float64
+}
 
 // Node[N model.NumericType] of a binary tree
-type Node[N basemdl.NumericType] interface {
+type Node[N numericType] interface {
 
 	// Key returns the node's key
 	Key() N
@@ -30,10 +35,10 @@ type Node[N basemdl.NumericType] interface {
 }
 
 // NewNode[N model.NumericType] is a callback to an implementation to instantiate a node
-type NewNode[N basemdl.NumericType] func(key N) Node[N]
+type NewNode[N numericType] func(key N) Node[N]
 
 // InsertNode[N model.NumericType] an operation to create a binary tree
-func InsertNode[N basemdl.NumericType](newNode NewNode[N], root Node[N], key N) Node[N] {
+func InsertNode[N numericType](newNode NewNode[N], root Node[N], key N) Node[N] {
 
 	if root == nil {
 		root = newNode(key)
