@@ -22,7 +22,7 @@ You will find detail descriptions of applications and data models in this projec
 
 ### Data models
 
-* [Base model](./docs/basemodel.md)
+* [Table models](./docs/table.md)
 * [Tree structures](./docs/treemdl.md)
 * [Roman numerals](./docs/romans.md)
 
