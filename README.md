@@ -19,7 +19,7 @@ You will find detail descriptions of applications and data models in this projec
 ### Applications
 
 * [BIFID cipher](./docs/bifid.md)
-* [Palindrom detector](./cmd/palindrome/) is an application that detects a word or number that reads the same forward or backward.
+* [Palindrom detector](./cmd/palindrome/) is an application that detects a word or number that reads the same forward or backward. The application includes two ways of determining if a word is a palindrome. The two approaches are benchmarked.
 
 ### Data models
 
