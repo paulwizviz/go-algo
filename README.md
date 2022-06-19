@@ -1,8 +1,6 @@
 # Overview
 
-A project demonstrating implementation of data structure and algorithm.
-
-NOTE: The implementation in this module are mostly based on Go 1.18
+This is an educational project demonstrating implementation of data structure and algorithms.
 
 ## cmd
 
@@ -29,4 +27,5 @@ You will find detail descriptions of applications and data models in this projec
 
 ## Disclaimers
 
-The packages in this module are intended for educational purpose only.
+* The packages in this module are intended for educational purpose only.
+* The implementation in this module are mostly based on Go 1.18
