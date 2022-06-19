@@ -27,5 +27,6 @@ You will find detail descriptions of applications and data models in this projec
 
 ## Disclaimers
 
-* The packages in this module are intended for educational purpose only.
+* The packages in this project are intended for educational purpose only.
+* This package is constantly updated and items may be removed and modified without warning.
 * The implementation in this module are mostly based on Go 1.18
