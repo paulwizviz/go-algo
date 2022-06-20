@@ -2,111 +2,134 @@ package queue
 
 import "fmt"
 
-func Example_newVariableQueue() {
-	vq := NewVariableQueue[uint8]()
+type Test struct {
+	content int
+}
+
+func Example_variableNew() {
+	vq := NewVariable[uint8]()
 	fmt.Println(vq)
 
-	vq = NewVariableQueue[uint8](1, 2, 3)
-	fmt.Println(vq)
+	vq0 := NewVariable(1.1, 1.2) // default to float32
+	fmt.Println(vq0)
 
-	vq1 := NewVariableQueue('a')
+	vq01 := NewVariable[float32](1.1, 1.2)
+	fmt.Println(vq01)
+
+	vq1 := NewVariable("abcd", "efgh")
 	fmt.Println(vq1)
 
-	vq2 := NewVariableQueue[byte]('a')
+	vq2 := NewVariable('a', 'b')
 	fmt.Println(vq2)
+
+	vq3 := NewVariable[byte]('a', 'b')
+	fmt.Println(vq3)
+
+	vq4 := NewVariable(Test{content: 1})
+	fmt.Println(vq4)
 
 	// Output:
 	// &{[]}
-	// &{[1 2 3]}
-	// &{[97]}
-	// &{[97]}
+	// &{[1.1 1.2]}
+	// &{[1.1 1.2]}
+	// &{[abcd efgh]}
+	// &{[97 98]}
+	// &{[97 98]}
+	// &{[{1}]}
 }
 
-func Example_newFixedQueue() {
-	fq := NewFixQueue[uint8](1)
-	fmt.Println(fq)
-
-	// Output:
-}
-
-func Example_enqueueVariable() {
-	vq := NewVariableQueue[uint8]()
-	vq, item := Enqueue(vq, 1)
-	vq, item = Enqueue(vq, 2)
-	fmt.Println(vq, *item)
-
-	// Output:
-	// &{[1 2]} 2
-}
-
-func Example_dequeueVariable() {
-	vq := NewVariableQueue[uint8](1, 2, 3)
+func Example_variableEnqueue() {
+	vq := NewVariable[Test]()
 	fmt.Println(vq)
 
-	vq, item := Dequeue(vq)
-	fmt.Println(vq, *item)
-
-	vq, item = Dequeue(vq)
-	fmt.Println(vq, *item)
-
-	vq, item = Dequeue(vq)
-	fmt.Println(vq, *item)
-
-	vq, item = Dequeue(vq)
-	fmt.Println(vq, item)
+	vq.Enqueue(Test{content: 12})
+	fmt.Println(vq)
 
 	// Output:
-	// &{[1 2 3]}
-	// &{[2 3]} 1
-	// &{[3]} 2
-	// &{[]} 3
-	// &{[]} <nil>
+	// &{[]}
+	// &{[{12}]}
 }
 
-func Example_enqueueFixed() {
-	fq := NewFixQueue[uint8](3)
-	fmt.Println(fq)
+func Example_variableDequeue() {
+	vq := NewVariable[Test]()
+	fmt.Println(vq)
 
-	fq, item := Enqueue(fq, 1)
-	fmt.Println(item)
+	result := vq.Dequeue()
+	fmt.Println(result)
 
-	fq, item = Enqueue(fq, 1)
-	fmt.Println(item)
-
-	fq, item = Enqueue(fq, 1)
-	fmt.Println(item)
-
-	_, item = Enqueue(fq, 1)
-	fmt.Println(item)
+	vq.Enqueue(Test{content: 400})
+	result = vq.Dequeue()
+	fmt.Println(result)
 
 	// Output:
-	// 	&{[] 3}
-	// 0xc0000a4238
-	// 0xc0000a4239
-	// 0xc0000a423a
+	// &{[]}
+	// <nil>
+	// &{400}
+}
+
+func Example_fixedNew() {
+	fq := NewFixed[uint16](2)
+	fmt.Println(fq)
+
+	// Output:
+	// &{[] 2}
+}
+
+func Example_fixedCapacity() {
+	fq := NewFixed[uint16](2)
+	capcity := fq.Capcity()
+	fmt.Println(capcity)
+
+	// Output:
+	// 2
+}
+
+func Example_fixedEnqueue() {
+	fq := NewFixed[uint16](2)
+	fmt.Println(fq)
+
+	result := fq.Enqueue(12)
+	fmt.Println(result)
+
+	result = fq.Enqueue(13)
+	fmt.Println(result)
+
+	result = fq.Enqueue(40)
+	fmt.Println(result)
+
+	// Output:
+	// &{[] 2}
+	// 0xc000016318
+	// 0xc00001631a
 	// <nil>
 }
 
-func Example_dequeFixed() {
-	fq := NewFixQueue[uint8](3)
+func Example_fixedIsFull() {
+	fq := NewFixed[uint16](2)
 	fmt.Println(fq)
 
-	fq, item := Dequeue(fq)
-	fmt.Println(item)
+	fq.Enqueue(12)
+	result := fq.IsFull()
+	fmt.Println(result)
 
-	fq, item = Enqueue(fq, 1)
-	if item != nil {
-		fmt.Println(*item)
-	}
-
-	fq, item = Dequeue(fq)
-	if item != nil {
-		fmt.Println(*item)
-	}
+	fq.Enqueue(13)
+	result = fq.IsFull()
+	fmt.Println(result)
 
 	// Output:
-	// &{[] 3}
+	// &{[] 2}
+	// false
+	// true
+}
+
+func Example_fixedDequeue() {
+	fq := NewFixed[uint16](2)
+	fmt.Println(fq)
+
+	result := fq.Dequeue()
+	fmt.Println(result)
+
+	// Output:
+	// &{[] 2}
 	// <nil>
-	// 1
-	// 1
 }
