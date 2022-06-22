@@ -1,25 +1,21 @@
 # Overview
 
-This is an educational project demonstrating implementation of data structure and algorithms.
+A collection of executable data models and algorithms implemented in Go.
 
-Please install the following items to work with the working examples.
-
-* Go version 1.18 or later
+Please install Go version 1.18 or later to work with the executable examples.
 
 ## Project structure
 
-The working examples in this project are executable within docker containers or network of containers.
-
-You will find the Go codes used to build applications in these folders:
+The Go codes are organised in these folders:
 
 * `build` -- scripts used to create apps and containers
 * `cmd` -- source codes for building executables
 * `internal` - share packages to for `cmd`
 • `scripts` - bash scripts to help you build and execute apps.
 
-## Working examples
+## Topics
 
-You will find detail descriptions of applications and data models in this project.
+The topics covered in this projects are:
 
 ### Applications
 
